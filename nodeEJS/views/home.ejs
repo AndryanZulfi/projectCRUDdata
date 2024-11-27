@@ -1,0 +1,13 @@
+<h1>Ini adalah halaman home</h1>
+<h3>Daftar nama</h3>
+   <% if (data.length  == 0) { %>
+        <h4>Data Kosong</h4>
+    <% } %>
+    <% data.forEach(el => {%>
+        <ul>
+            <li><%- el.name%> <%- el.age%> tahun</li>
+        </ul>
+
+    <%})%>
+
+

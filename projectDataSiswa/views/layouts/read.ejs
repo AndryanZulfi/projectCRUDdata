@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="section">
+        <h2>Student List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% listSiswa.forEach((el,i) => { %>
+                    <tr>
+                        <td><%- i+1%></td>
+                        <td><%- el.name%></td>
+                        <td><%- el.email%></td>
+                        <td><%- el.age%></td>
+                    </tr>
+                <% }) %>
+                <!-- More rows would be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
