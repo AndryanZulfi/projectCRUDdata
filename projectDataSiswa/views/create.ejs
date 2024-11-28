@@ -1,6 +1,6 @@
 <div class="section">
     <h2>Add New Student</h2>
-    <form id="addStudentForm" action="/add" method="post">
+    <form id="addStudentForm" action="/create" method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         
@@ -11,5 +11,14 @@
         <input type="number" id="age" name="age" required>
         
         <button type="submit">Add Student</button>
+
+        <script>
+            // const params = new URLSearchParams(window.location.search)
+            // if(params.get('success')== 'true'){
+            //     alert(`Berhasil Menambahkan data ${params.get('id')}`)
+            // }else if(params.get('success') == 'false'){
+            //     alert(`Gagal menambahkan data ${params.get('id')}`)
+            // }
+        </script>
     </form>
 </div>
