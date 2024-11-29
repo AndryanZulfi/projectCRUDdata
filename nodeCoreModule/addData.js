@@ -1,9 +1,9 @@
 const fs = require('fs')
-// const readline = require('node:readline')
-// const { stdin: input, stdout: output } = require('node:process');
+const readline = require('node:readline')
+const { stdin: input, stdout: output } = require('node:process');
 // const { resolve } = require('dns/promises');
 var validator = require('validator');
-// const rl = readline.createInterface({input, output});
+const rl = readline.createInterface({input, output});
 
 const dirPath = './data'
 if(!fs.existsSync(dirPath)){
@@ -83,42 +83,30 @@ class ValidatorQuestion{
 }
 
 
-const createPertanyaan = (pertanyaan, callback) =>{
-    return new Promise((resolve) => {
-        const tanya = () => {
-            rl.question(pertanyaan, (answer) =>{
-                if(callback(answer)){
-                    resolve(answer)
-                }else{
-                    console.log('Input tidak valid. Silahkan coba lagi')
-                    tanya()
-                }
-            })
-        }
-        tanya()
-    })
+const createPertanyaan = async (pertanyaan, callback) =>{
+        return new Promise((resolve) => {
+            const tanya = () => {
+                rl.question(pertanyaan, (answer) =>{
+                    if(callback(answer)){
+                        resolve(answer)
+                    }else{
+                        console.log('Input tidak valid. Silahkan coba lagi')
+                        tanya()
+                    }
+                })
+            }
+            tanya()
+        })
 };
 
 // add data
 const addData = (name, nisn, email, noHp) =>{
-    if(!new ValidatorData(name).name()){
-        console.log('Nama tidak boleh kosong dan harus valid')
-    }else if(!new ValidatorData(nisn).nisn()){
-        console.log('Masukan NISN yang valid')
-    }else if(!new ValidatorData(email).email()){
-        console.log('Masukan email yang valid')
-    }else if(!new ValidatorData(noHp).noHp()){
-        console.log('Masukan no HP yang valid')
-    }else{
         const data = {name, nisn, email, noHp}
         const file = fs.readFileSync(dataPath, 'utf8')
         const dataSiswa = JSON.parse(file)
-    
         dataSiswa.push(data)
-    
         fs.writeFileSync(dataPath, JSON.stringify(dataSiswa))
         console.log('Terima Kasih sudah menambahkan data')     
-    }
 }
 // hapus data
 const hapusData = (name) =>{
@@ -154,5 +142,5 @@ const readData = (dataPath) =>{
     console.log(data)
 }
 
-module.exports = {createPertanyaan, dataPath, dirPath, validator, fs, readData, hapusData, addData, updatedata, ValidatorData, ValidatorQuestion}  //export module
+module.exports = {createPertanyaan, dataPath, dirPath, validator, fs, readData, hapusData, addData, updatedata, ValidatorData, ValidatorQuestion, rl}  //export module
 
