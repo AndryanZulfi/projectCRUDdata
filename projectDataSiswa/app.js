@@ -34,10 +34,10 @@ app.get('/', async(req, res)=>{
 
 
 // Halaman create
-app.post('/create', async(req, res)=>{
+app.post('/create', (req, res)=>{
     const {name, email, age} = req.body
     try{
-        await siswa.addSiswa(name, email, age)
+        siswa.addSiswa(name, email, age)
         res.redirect(`/create?id=${name}&&success=true`)
     }catch(e){
         res.redirect(`/create?id=${name}&&success=false`)
@@ -62,10 +62,7 @@ app.get("/create", async(req, res) => {
 app.post('/update', async(req, res)=>{
     const {updateId,updateName, updateEmail, updateAge} = req.body
     try{
-        const result = await siswa.updateSiswa(updateId, updateName, updateEmail, updateAge)
-        if(!result){
-            throw new Error ('Data tidak ditemukan')
-        }
+        await siswa.updateSiswa(updateId, updateName, updateEmail, updateAge)
         res.redirect(`/update?id=${updateId}&&success=true`)
     }catch(e){
         res.redirect(`/update?id=${updateId}&&success=false`)
@@ -91,13 +88,11 @@ app.get('/update', async(req,res) => {
 app.post('/delete', async(req, res) =>{
         const {id} = req.body
         try{
-            const result = await siswa.delSiswa(parseInt(id))
-            if(!result){
-                throw new Error('Data tidak ditemukan')
-            }
+            await siswa.delSiswa(parseInt(id))
             res.redirect(`/delete?id=${id}&&success=true`)
         }catch(e){
             res.redirect(`/delete?id=${id}&&success=false`)
+            console.log('Data tidak ditemukan')
         }
     })
     

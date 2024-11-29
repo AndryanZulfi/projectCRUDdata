@@ -23,7 +23,7 @@ const readSiswa = ()=>{
 
 // Menambah  data
 
-const addSiswa =(name, email, age) => {
+const addSiswa = (name, email, age) => {
     return new Siswa({
         name: name,
         email: email,
@@ -34,24 +34,12 @@ const addSiswa =(name, email, age) => {
 // Menghapus data
 
 const delSiswa = async(i) =>{
-        const getIdByIndex = await Siswa.find().skip(i-1).limit(1).select('_id');
+        const getIdByIndex =  await Siswa.find().skip(i-1).limit(1).select('_id');
             const id = getIdByIndex[0]._id
             return Siswa.deleteOne({
                 _id: id
             })
         }
-
-    
-    // if (getIdByIndex.length > 0) { 
-    //     const id = getIdByIndex[0]._id
-    //     return Siswa.deleteOne({
-    //         _id: id
-    //     })
-    //   } else {
-    //    console.log('Data Tidak Ditemukan')
-    //   }
-
-
 
 // Update data
 

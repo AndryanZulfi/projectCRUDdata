@@ -97,6 +97,8 @@ const createPertanyaan = async (pertanyaan, callback) =>{
             }
             tanya()
         })
+
+
 };
 
 // add data
